@@ -25,7 +25,7 @@ creds = None
 creds = service_account.Credentials.from_service_account_file(
 		SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
-# Zandax Inventory Test
+# Zandax Inventory
 SPREADSHEET_ID = '1JT0ZBqYStzik2oo5Gi2NKs9g8WrKFOgQhkyQfjjoIkY'
 # Zandax Inventory Test
 # SPREADSHEET_ID = '16uwPRXcKPnW1oW1uteBs89XYbynr6hkg-3D7-kVHAdE'
