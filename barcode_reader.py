@@ -8,7 +8,7 @@ import logging
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 from socket import timeout
-# from playsound import playsound
+from playsound import playsound
 
 headers = {
   'Content-Type': 'application/json',
@@ -26,9 +26,9 @@ creds = service_account.Credentials.from_service_account_file(
 		SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
 # Zandax Inventory
-SPREADSHEET_ID = '1JT0ZBqYStzik2oo5Gi2NKs9g8WrKFOgQhkyQfjjoIkY'
+# SPREADSHEET_ID = '1JT0ZBqYStzik2oo5Gi2NKs9g8WrKFOgQhkyQfjjoIkY'
 # Zandax Inventory Test
-# SPREADSHEET_ID = '16uwPRXcKPnW1oW1uteBs89XYbynr6hkg-3D7-kVHAdE'
+SPREADSHEET_ID = '16uwPRXcKPnW1oW1uteBs89XYbynr6hkg-3D7-kVHAdE'
 
 service = build('sheets', 'v4', credentials=creds)
 sheet = service.spreadsheets()
@@ -46,29 +46,24 @@ while True:
 	print("Scan a barcode.  Ctl-c to end.")
 
 	try:
+
 		upc_input = input()
 		
 		# Check to see if a location was scanned
 		location_scanned = False
 		if upc_input in str(locations):
 			saved_location = str(upc_input)
-			frequency = 1400
-			duration = 200
-			winsound.Beep(frequency, duration)
-			frequency = 1700
-			winsound.Beep(frequency, duration)
-			frequency = 2000
-			winsound.Beep(frequency, duration)
-			# playsound('/Warn_02.mp3')
+			# winsound.Beep(1400, 200)
+			# winsound.Beep(1700, 200)
+			# winsound.Beep(2000, 200)
+			playsound('.//Warn_02.mp3')
 		
 		# If a location wasn't scanned but saved_location is still blank
 		# issue an error.  A location must be scanned first
 		elif saved_location == None:
 			print("Warning! Scan a location before scanning a upc.\n")
-			frequency = 1000
-			duration = 700
-			winsound.Beep(frequency, duration)
-			# playsound('./Warn_01.mp3')
+			# winsound.Beep(1000, 700)
+			playsound('.//Warn_01.mp3')
 		
 		# If a location was not scanned then continue and write the upc
 		# to the spreadsheet
@@ -98,19 +93,13 @@ while True:
 				request = sheet.values().append(spreadsheetId=SPREADSHEET_ID, 
 											range="Sheet1!a2", valueInputOption="USER_ENTERED", 
 											insertDataOption="INSERT_ROWS", body={"values":gs_input}).execute()
-				frequency = 2000
-				duration = 200
-				winsound.Beep(frequency, duration)
+				winsound.Beep(2000, 200)
 
 			except HTTPError as error:
 				logging.error('HTTP Error: Data of %s not retrieved because %s\nURL: %s', upc_input, error, endpoint)
-				frequency = 2500
-				duration = 700
-				winsound.Beep(frequency, duration)
+				winsound.Beep(2500, 700)
 			except URLError as error:
-				frequency = 2500
-				duration = 700
-				winsound.Beep(frequency, duration)
+				winsound.Beep(2500, 700)
 				if isinstance(error.reason, timeout):
 					logging.error('Timeout Error: Data of %s not retrieved because %s\nURL: %s', error, endpoint)
 				else:
@@ -118,12 +107,8 @@ while True:
 			else:
 				logging.info('Access successful.')
 	except:
-		frequency = 1400
-		duration = 200
-		winsound.Beep(frequency, duration)
-		frequency = 1100
-		winsound.Beep(frequency, duration)
-		frequency = 800
-		winsound.Beep(frequency, duration)
+		winsound.Beep(1400, 200)
+		winsound.Beep(1100, 200)
+		winsound.Beep(800, 200)
 		print("Ending program")
 		break
