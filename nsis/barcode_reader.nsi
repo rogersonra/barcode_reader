@@ -80,13 +80,8 @@ SetOverwrite ifnewer
 SetOutPath "$INSTDIR"
 File "G:\python3.9\projects\usb_scanner\barcode_reader.exe"
 File "G:\python3.9\projects\usb_scanner\barcode_reader.py"
-File "G:\python3.9\projects\usb_scanner\barcode_reader.spec"
-File "G:\python3.9\projects\usb_scanner\barcode_reader.spec_test"
-File "G:\python3.9\projects\usb_scanner\barcode_reader.zip"
 File "G:\python3.9\projects\usb_scanner\gs-keys.json"
 File "G:\python3.9\projects\usb_scanner\requirements.txt"
-File "G:\python3.9\projects\usb_scanner\Warn_01.mp3"
-File "G:\python3.9\projects\usb_scanner\Warn_02.mp3"
 SectionEnd
 
 ######################################################################
@@ -139,13 +134,8 @@ Section Uninstall
 ${INSTALL_TYPE}
 Delete "$INSTDIR\barcode_reader.exe"
 Delete "$INSTDIR\barcode_reader.py"
-Delete "$INSTDIR\barcode_reader.spec"
-Delete "$INSTDIR\barcode_reader.spec_test"
-Delete "$INSTDIR\barcode_reader.zip"
 Delete "$INSTDIR\gs-keys.json"
 Delete "$INSTDIR\requirements.txt"
-Delete "$INSTDIR\Warn_01.mp3"
-Delete "$INSTDIR\Warn_02.mp3"
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
 Delete "$INSTDIR\${APP_NAME} website.url"

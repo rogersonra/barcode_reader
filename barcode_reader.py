@@ -1,13 +1,15 @@
-import os
-from googleapiclient.discovery import build
-from google.oauth2 import service_account
-import winsound
-import urllib.request
 import json
 import logging
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
+import os
+import sys
+import urllib.request
+import winsound
 from socket import timeout
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
+
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 from playsound import playsound
 
 headers = {
@@ -48,22 +50,24 @@ while True:
 	try:
 
 		upc_input = input()
-		
-		# Check to see if a location was scanned
 		location_scanned = False
+
+		# Check to see if a location was scanned
 		if upc_input in str(locations):
 			saved_location = str(upc_input)
 			# winsound.Beep(1400, 200)
 			# winsound.Beep(1700, 200)
 			# winsound.Beep(2000, 200)
-			playsound('.//Warn_02.mp3')
+			# playsound('.\\sfx\\Warn_02.mp3')
+			playsound('Warn_02.mp3')
 		
 		# If a location wasn't scanned but saved_location is still blank
 		# issue an error.  A location must be scanned first
 		elif saved_location == None:
 			print("Warning! Scan a location before scanning a upc.\n")
 			# winsound.Beep(1000, 700)
-			playsound('.//Warn_01.mp3')
+			# playsound('.\\sfx\\Warn_01.mp3')
+			playsound('Warn_01.mp3')
 		
 		# If a location was not scanned then continue and write the upc
 		# to the spreadsheet
@@ -106,9 +110,10 @@ while True:
 					logging.error('URL Error: Data of %s not retrieved because %s\nURL: %s', error, endpoint)
 			else:
 				logging.info('Access successful.')
+	
 	except:
 		winsound.Beep(1400, 200)
 		winsound.Beep(1100, 200)
 		winsound.Beep(800, 200)
 		print("Ending program")
-		break
+		sys.exit(0)

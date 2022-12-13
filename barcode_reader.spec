@@ -1,8 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
-# pyinstaller /nsis/barcode_reader.spec
 from PyInstaller.utils.hooks import collect_data_files
 
-datas = []
+datas = [
+    ('/usb_scanner/sfx/*.mp3', 'sfx')
+]
 datas += collect_data_files('googleapiclient')
 
 
