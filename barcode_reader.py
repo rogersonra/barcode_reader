@@ -59,19 +59,13 @@ while True:
         # Check to see if a location was scanned
         if upc_input in str(locations):
             saved_location = str(upc_input)
-            # winsound.Beep(1400, 200)
-            # winsound.Beep(1700, 200)
-            # winsound.Beep(2000, 200)
-            # playsound('.\\sfx\\Warn_02.mp3')
-            playsound("Warn_02.mp3")
+            winsound.PlaySound("Warn_02.wav", winsound.SND_FILENAME)
 
         # If a location wasn't scanned but saved_location is still blank
         # issue an error.  A location must be scanned first
         elif saved_location == None:
             print("Warning! Scan a location before scanning a upc.\n")
-            # winsound.Beep(1000, 700)
-            # playsound('.\\sfx\\Warn_01.mp3')
-            playsound("Warn_01.mp3")
+            winsound.PlaySound("Warn_01.wav", winsound.SND_FILENAME)
 
         # If a location was not scanned then continue and write the upc
         # to the spreadsheet
